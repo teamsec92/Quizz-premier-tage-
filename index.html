@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz des pièces — Premier étage</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 15px;
+}
+
+h1 {
+    text-align: center;
+    margin: 10px 0 15px;
+    font-size: 25px;
+}
+
+.quiz {
+    background: white;
+    border-radius: 14px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.12);
+}
+
+.plan {
+    position: relative;
+    width: 100%;
+    margin: auto;
+}
+
+.plan img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.mask {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 36%;
+    height: 82%;
+    background: white;
+    z-index: 2;
+}
+
+.room {
+    position: absolute;
+    width: 4%;
+    height: 4%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    background: transparent;
+    border: 1px solid rgba(40, 100, 180, 0.35);
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+}
+
+.room:hover {
+    background: rgba(40, 100, 180, 0.07);
+    border-color: rgba(40, 100, 180, 0.65);
+}
+
+.room.selected {
+    background: rgba(40, 100, 180, 0.10);
+    border: 2px solid rgba(40, 100, 180, 0.70);
+}
+
+.room.correct {
+    background: rgba(50, 170, 80, 0.12);
+    border: 2px solid rgba(50, 150, 70, 0.80);
+}
+
+.room.incorrect {
+    background: rgba(200, 50, 50, 0.10);
+    border: 2px solid rgba(200, 50, 50, 0.80);
+}
+
+.r1  { left: 40.1%; top: 24.7%; }
+.r2  { left: 35.1%; top: 24.7%; }
+.r3  { left: 45.8%; top: 24.7%; }
+.r4  { left: 30.0%; top: 25.3%; }
+.r5  { left: 51.3%; top: 25.3%; }
+.r6  { left: 30.0%; top: 40.5%; }
+.r7  { left: 51.0%; top: 40.5%; }
+.r8  { left: 45.8%; top: 40.5%; }
+.r9  { left: 40.5%; top: 40.5%; }
+.r10 { left: 22.9%; top: 51.0%; }
+.r11 { left: 17.5%; top: 51.0%; }
+.r12 { left: 13.8%; top: 51.0%; }
+.r13 { left: 8.7%;  top: 44.0%; }
+.r14 { left: 8.7%;  top: 32.5%; }
+.r15 { left: 8.7%;  top: 20.5%; }
+
+.legendBtn,
+button {
+    border: none;
+    border-radius: 8px;
+    padding: 11px 15px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.legendBtn {
+    display: block;
+    margin: 12px auto;
+    background: #eee;
+}
+
+.question {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.question strong {
+    font-size: 20px;
+}
+
+.answer {
+    width: 100%;
+    max-width: 500px;
+    display: block;
+    margin: 10px auto;
+    padding: 13px;
+    font-size: 18px;
+    border: 1px solid #bbb;
+    border-radius: 8px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.verify {
+    background: #2f8f46;
+    color: white;
+}
+
+.nav {
+    background: #e8edf2;
+}
+
+.finish {
+    background: #222;
+    color: white;
+}
+
+.feedback {
+    text-align: center;
+    min-height: 25px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.score {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 7px;
+    }
+
+    h1 {
+        font-size: 21px;
+    }
+
+    .quiz {
+        padding: 8px;
+    }
+
+    .answer {
+        font-size: 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>Quiz des pièces — Premier étage</h1>
+
+<div class="quiz">
+
+<div class="plan">
+    <img src="plan-premier-étage.png.PNG" alt="Plan du premier étage">
+    <div class="mask" id="mask"></div>
+
+    <button class="room r1" data-room="1"></button>
+    <button class="room r2" data-room="2"></button>
+    <button class="room r3" data-room="3"></button>
+    <button class="room r4" data-room="4"></button>
+    <button class="room r5" data-room="5"></button>
+    <button class="room r6" data-room="6"></button>
+    <button class="room r7" data-room="7"></button>
+    <button class="room r8" data-room="8"></button>
+    <button class="room r9" data-room="9"></button>
+    <button class="room r10" data-room="10"></button>
+    <button class="room r11" data-room="11"></button>
+    <button class="room r12" data-room="12"></button>
+    <button class="room r13" data-room="13"></button>
+    <button class="room r14" data-room="14"></button>
+    <button class="room r15" data-room="15"></button>
+</div>
+
+<button class="legendBtn" onclick="toggleLegend()">👁️ Voir la légende</button>
+
+<div class="question">
+    <strong id="question">Pièce n°1</strong>
+</div>
+
+<input
+    id="answer"
+    class="answer"
+    type="text"
+    placeholder="Écris le nom de la pièce"
+    autocomplete="off"
+>
+
+<div class="buttons">
+    <button class="verify" onclick="checkAnswer()">✓ Vérifier</button>
+    <button class="nav" onclick="previousRoom()">← Précédente</button>
+    <button class="nav" onclick="nextRoom()">→ Suivante</button>
+    <button class="finish" onclick="finishQuiz()">🏁 Terminer le quiz</button>
+</div>
+
+<div id="feedback" class="feedback"></div>
+<div id="score" class="score"></div>
+
+</div>
+</div>
+
+<script>
+const rooms = {
+    1: "Salon Doré",
+    2: "Secrétariat particulier",
+    3: "Salon Vert",
+    4: "Bureau des collaborateurs",
+    5: "Bureau des collaborateurs",
+    6: "Bureau des collaborateurs",
+    7: "Bureau des collaborateurs",
+    8: "Salon des huissiers",
+    9: "Vestibule",
+    10: "Appartement privé",
+    11: "Appartement privé",
+    12: "Appartement privé",
+    13: "Appartement privé",
+    14: "Appartement privé",
+    15: "Appartement privé"
+};
+
+let currentRoom = 1;
+const answers = {};
+const checked = {};
+
+function normalize(text) {
+    return text
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[’']/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+}
+
+function updateDisplay() {
+    document.getElementById("question").textContent =
+        "Pièce n°" + currentRoom;
+
+    document.getElementById("answer").value =
+        answers[currentRoom] || "";
+
+    const feedback = document.getElementById("feedback");
+
+    if (checked[currentRoom] === true) {
+        feedback.textContent = "✓ Bonne réponse";
+        feedback.style.color = "#2f8f46";
+    } else if (checked[currentRoom] === false) {
+        feedback.textContent = "✗ Mauvaise réponse";
+        feedback.style.color = "#c83232";
+    } else {
+        feedback.textContent = "";
+    }
+
+    document.querySelectorAll(".room").forEach(btn => {
+        btn.classList.remove("selected");
+
+        if (Number(btn.dataset.room) === currentRoom) {
+            btn.classList.add("selected");
+        }
+
+        btn.classList.remove("correct", "incorrect");
+
+        const n = Number(btn.dataset.room);
+
+        if (checked[n] === true) {
+            btn.classList.add("correct");
+        }
+
+        if (checked[n] === false) {
+            btn.classList.add("incorrect");
+        }
+    });
+}
+
+function saveCurrentAnswer() {
+    answers[currentRoom] =
+        document.getElementById("answer").value.trim();
+}
+
+function selectRoom(number) {
+    saveCurrentAnswer();
+    currentRoom = number;
+    updateDisplay();
+    document.getElementById("answer").focus();
+}
+
+function checkAnswer() {
+    saveCurrentAnswer();
+
+    const user = normalize(answers[currentRoom] || "");
+    const correct = normalize(rooms[currentRoom]);
+
+    checked[currentRoom] = user === correct && user !== "";
+
+    const feedback = document.getElementById("feedback");
+
+    if (checked[currentRoom]) {
+        feedback.textContent = "✓ Bonne réponse !";
+        feedback.style.color = "#2f8f46";
+    } else {
+        feedback.textContent =
+            "✗ Mauvaise réponse — réponse : " + rooms[currentRoom];
+        feedback.style.color = "#c83232";
+    }
+
+    updateDisplay();
+}
+
+function nextRoom() {
+    saveCurrentAnswer();
+
+    if (currentRoom < 15) {
+        currentRoom++;
+        updateDisplay();
+        document.getElementById("answer").focus();
+    }
+}
+
+function previousRoom() {
+    saveCurrentAnswer();
+
+    if (currentRoom > 1) {
+        currentRoom--;
+        updateDisplay();
+        document.getElementById("answer").focus();
+    }
+}
+
+function finishQuiz() {
+    saveCurrentAnswer();
+
+    let score = 0;
+
+    for (let i = 1; i <= 15; i++) {
+        const user = normalize(answers[i] || "");
+        const correct = normalize(rooms[i]);
+
+        checked[i] = user === correct && user !== "";
+
+        if (checked[i]) {
+            score++;
+        }
+    }
+
+    updateDisplay();
+
+    document.getElementById("score").textContent =
+        "🏆 Résultat : " + score + " / 15";
+
+    document.getElementById("feedback").textContent =
+        "Quiz terminé !";
+    document.getElementById("feedback").style.color = "#222";
+}
+
+function toggleLegend() {
+    const mask = document.getElementById("mask");
+
+    if (mask.style.display === "none") {
+        mask.style.display = "block";
+    } else {
+        mask.style.display = "none";
+    }
+}
+
+document.querySelectorAll(".room").forEach(btn => {
+    btn.addEventListener("click", () => {
+        selectRoom(Number(btn.dataset.room));
+    });
+});
+
+document.getElementById("answer").addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+        checkAnswer();
+    }
+});
+
+updateDisplay();
+</script>
+
+</body>
+</html>
