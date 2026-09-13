@@ -37,6 +37,10 @@ h1 {
     box-shadow: 0 3px 15px rgba(0,0,0,0.08);
 }
 
+/* =========================
+   PLAN
+   ========================= */
+
 .plan-container {
     position: relative;
     width: 100%;
@@ -49,20 +53,16 @@ h1 {
     display: block;
     width: 100%;
     height: auto;
+
+    /* Cache uniquement la légende à droite */
+    clip-path: inset(0 36% 0 0);
 }
 
-/* Masque uniquement la légende située à droite */
-.mask {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 36%;
-    height: 82%;
-    background: white;
-    z-index: 2;
-}
 
-/* Pastilles */
+/* =========================
+   PASTILLES
+   ========================= */
+
 .room {
     position: absolute;
     width: 4%;
@@ -102,7 +102,10 @@ h1 {
     border: 2px solid rgba(200, 50, 50, 0.80);
 }
 
-/* Positions des 15 pièces */
+
+/* =========================
+   POSITIONS DES 15 PIÈCES
+   ========================= */
 
 .r1  { left: 40.1%; top: 24.7%; }
 .r2  { left: 35.1%; top: 24.7%; }
@@ -124,6 +127,10 @@ h1 {
 .r14 { left: 8.7%; top: 32.5%; }
 .r15 { left: 8.7%; top: 20.5%; }
 
+
+/* =========================
+   LÉGENDE
+   ========================= */
 
 .legend-button {
     display: block;
@@ -160,6 +167,11 @@ h1 {
     line-height: 1.6;
 }
 
+
+/* =========================
+   QUESTION
+   ========================= */
+
 .question {
     text-align: center;
     font-size: 34px;
@@ -181,6 +193,11 @@ h1 {
 .answer:focus {
     border-color: #4285f4;
 }
+
+
+/* =========================
+   BOUTONS
+   ========================= */
 
 .buttons {
     display: flex;
@@ -230,6 +247,18 @@ button.action:active {
     cursor: pointer;
 }
 
+
+/* =========================
+   RÉSULTAT
+   ========================= */
+
+.status {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 18px;
+    min-height: 25px;
+}
+
 .result {
     display: none;
 
@@ -245,12 +274,10 @@ button.action:active {
     font-weight: bold;
 }
 
-.status {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 18px;
-    min-height: 25px;
-}
+
+/* =========================
+   IPHONE / MOBILE
+   ========================= */
 
 @media (max-width: 600px) {
 
@@ -290,6 +317,7 @@ button.action:active {
 </style>
 </head>
 
+
 <body>
 
 <div class="container">
@@ -298,112 +326,193 @@ button.action:active {
 
 <div class="quiz-card">
 
-    <div class="plan-container">
 
-        <img
-            src="plan-premier-étage.png"
-            class="plan-image"
-            alt="Plan du premier étage"
-        >
+<!-- =========================
+     PLAN
+     ========================= -->
 
-        <div class="mask"></div>
+<div class="plan-container">
 
-        <button class="room r1" onclick="selectRoom(1)" aria-label="Pièce 1"></button>
-        <button class="room r2" onclick="selectRoom(2)" aria-label="Pièce 2"></button>
-        <button class="room r3" onclick="selectRoom(3)" aria-label="Pièce 3"></button>
-        <button class="room r4" onclick="selectRoom(4)" aria-label="Pièce 4"></button>
-        <button class="room r5" onclick="selectRoom(5)" aria-label="Pièce 5"></button>
-        <button class="room r6" onclick="selectRoom(6)" aria-label="Pièce 6"></button>
-        <button class="room r7" onclick="selectRoom(7)" aria-label="Pièce 7"></button>
-        <button class="room r8" onclick="selectRoom(8)" aria-label="Pièce 8"></button>
-        <button class="room r9" onclick="selectRoom(9)" aria-label="Pièce 9"></button>
-        <button class="room r10" onclick="selectRoom(10)" aria-label="Pièce 10"></button>
-        <button class="room r11" onclick="selectRoom(11)" aria-label="Pièce 11"></button>
-        <button class="room r12" onclick="selectRoom(12)" aria-label="Pièce 12"></button>
-        <button class="room r13" onclick="selectRoom(13)" aria-label="Pièce 13"></button>
-        <button class="room r14" onclick="selectRoom(14)" aria-label="Pièce 14"></button>
-        <button class="room r15" onclick="selectRoom(15)" aria-label="Pièce 15"></button>
-
-    </div>
-
-    <button class="legend-button" onclick="toggleLegend()">
-        👁️ Voir la légende
-    </button>
-
-    <div id="legend" class="legend">
-
-        <strong>Les bureaux du premier étage :</strong><br><br>
-
-        1. Salon Doré<br>
-        2. Secrétariat particulier<br>
-        3. Salon Vert<br>
-        4-7. Bureaux des collaborateurs<br>
-        8. Salon des huissiers<br>
-        9. Vestibule<br>
-        10-15. Appartements privés
-
-    </div>
-
-    <div id="question" class="question">
-        Pièce n°1
-    </div>
-
-    <input
-        id="answer"
-        class="answer"
-        type="text"
-        placeholder="Écris le nom de la pièce"
-        autocomplete="off"
-        autocorrect="off"
-        spellcheck="false"
+    <img
+        src="plan-premier-étage.png"
+        class="plan-image"
+        alt="Plan du premier étage"
     >
 
-    <div class="buttons">
+    <button class="room r1"
+        onclick="selectRoom(1)"
+        aria-label="Pièce 1"></button>
 
-        <button
-            class="action check"
-            onclick="checkAnswer()">
-            ✓ Vérifier
-        </button>
+    <button class="room r2"
+        onclick="selectRoom(2)"
+        aria-label="Pièce 2"></button>
 
-        <button
-            class="action"
-            onclick="previousRoom()">
-            ← Précédente
-        </button>
+    <button class="room r3"
+        onclick="selectRoom(3)"
+        aria-label="Pièce 3"></button>
 
-        <button
-            class="action"
-            onclick="nextRoom()">
-            → Suivante
-        </button>
+    <button class="room r4"
+        onclick="selectRoom(4)"
+        aria-label="Pièce 4"></button>
 
-    </div>
+    <button class="room r5"
+        onclick="selectRoom(5)"
+        aria-label="Pièce 5"></button>
+
+    <button class="room r6"
+        onclick="selectRoom(6)"
+        aria-label="Pièce 6"></button>
+
+    <button class="room r7"
+        onclick="selectRoom(7)"
+        aria-label="Pièce 7"></button>
+
+    <button class="room r8"
+        onclick="selectRoom(8)"
+        aria-label="Pièce 8"></button>
+
+    <button class="room r9"
+        onclick="selectRoom(9)"
+        aria-label="Pièce 9"></button>
+
+    <button class="room r10"
+        onclick="selectRoom(10)"
+        aria-label="Pièce 10"></button>
+
+    <button class="room r11"
+        onclick="selectRoom(11)"
+        aria-label="Pièce 11"></button>
+
+    <button class="room r12"
+        onclick="selectRoom(12)"
+        aria-label="Pièce 12"></button>
+
+    <button class="room r13"
+        onclick="selectRoom(13)"
+        aria-label="Pièce 13"></button>
+
+    <button class="room r14"
+        onclick="selectRoom(14)"
+        aria-label="Pièce 14"></button>
+
+    <button class="room r15"
+        onclick="selectRoom(15)"
+        aria-label="Pièce 15"></button>
+
+</div>
+
+
+<!-- =========================
+     LÉGENDE
+     ========================= -->
+
+<button class="legend-button" onclick="toggleLegend()">
+    👁️ Voir la légende
+</button>
+
+<div id="legend" class="legend">
+
+    <strong>Les bureaux du premier étage :</strong>
+    <br><br>
+
+    1. Salon Doré
+    <br>
+
+    2. Secrétariat particulier
+    <br>
+
+    3. Salon Vert
+    <br>
+
+    4-7. Bureaux des collaborateurs
+    <br>
+
+    8. Salon des huissiers
+    <br>
+
+    9. Vestibule
+    <br>
+
+    10-15. Appartements privés
+
+</div>
+
+
+<!-- =========================
+     QUESTION
+     ========================= -->
+
+<div id="question" class="question">
+    Pièce n°1
+</div>
+
+
+<input
+    id="answer"
+    class="answer"
+    type="text"
+    placeholder="Écris le nom de la pièce"
+    autocomplete="off"
+    autocorrect="off"
+    spellcheck="false"
+>
+
+
+<!-- =========================
+     NAVIGATION
+     ========================= -->
+
+<div class="buttons">
 
     <button
-        class="finish"
-        onclick="finishQuiz()">
-        🏁 Terminer le quiz
+        class="action check"
+        onclick="checkAnswer()">
+        ✓ Vérifier
     </button>
 
-    <div id="status" class="status"></div>
+    <button
+        class="action"
+        onclick="previousRoom()">
+        ← Précédente
+    </button>
 
-    <div id="result" class="result"></div>
+    <button
+        class="action"
+        onclick="nextRoom()">
+        → Suivante
+    </button>
 
 </div>
 
+
+<button
+    class="finish"
+    onclick="finishQuiz()">
+    🏁 Terminer le quiz
+</button>
+
+
+<div id="status" class="status"></div>
+
+<div id="result" class="result"></div>
+
+
 </div>
+</div>
+
 
 <script>
 
-/* ============================
+/* =========================
    RÉPONSES
-   ============================ */
+   ========================= */
 
 const correctAnswers = {
 
     1: "Salon Doré",
+
     2: "Secrétariat particulier",
+
     3: "Salon Vert",
 
     4: "Bureaux des collaborateurs",
@@ -412,6 +521,7 @@ const correctAnswers = {
     7: "Bureaux des collaborateurs",
 
     8: "Salon des huissiers",
+
     9: "Vestibule",
 
     10: "Appartements privés",
@@ -423,9 +533,9 @@ const correctAnswers = {
 };
 
 
-/* ============================
+/* =========================
    VARIABLES
-   ============================ */
+   ========================= */
 
 let currentRoom = 1;
 
@@ -433,9 +543,9 @@ const answers = {};
 const checked = {};
 
 
-/* ============================
+/* =========================
    NORMALISATION
-   ============================ */
+   ========================= */
 
 function normalize(text) {
 
@@ -449,9 +559,21 @@ function normalize(text) {
 }
 
 
-/* ============================
-   SÉLECTION D'UNE PIÈCE
-   ============================ */
+/* =========================
+   SAUVEGARDE
+   ========================= */
+
+function saveCurrentAnswer() {
+
+    const input = document.getElementById("answer");
+
+    answers[currentRoom] = input.value;
+}
+
+
+/* =========================
+   SÉLECTION
+   ========================= */
 
 function selectRoom(room) {
 
@@ -463,30 +585,20 @@ function selectRoom(room) {
 }
 
 
-/* ============================
-   SAUVEGARDE
-   ============================ */
-
-function saveCurrentAnswer() {
-
-    const input = document.getElementById("answer");
-
-    answers[currentRoom] = input.value;
-}
-
-
-/* ============================
+/* =========================
    AFFICHAGE
-   ============================ */
+   ========================= */
 
 function updateDisplay() {
 
     document.getElementById("question").textContent =
         "Pièce n°" + currentRoom;
 
-    const input = document.getElementById("answer");
+    const input =
+        document.getElementById("answer");
 
-    input.value = answers[currentRoom] || "";
+    input.value =
+        answers[currentRoom] || "";
 
     document.getElementById("status").textContent = "";
 
@@ -496,15 +608,16 @@ function updateDisplay() {
 }
 
 
-/* ============================
-   COULEURS DES PASTILLES
-   ============================ */
+/* =========================
+   COULEURS
+   ========================= */
 
 function updateRoomColors() {
 
     for (let i = 1; i <= 15; i++) {
 
-        const room = document.querySelector(".r" + i);
+        const room =
+            document.querySelector(".r" + i);
 
         room.classList.remove(
             "selected",
@@ -513,15 +626,19 @@ function updateRoomColors() {
         );
 
         if (i === currentRoom) {
+
             room.classList.add("selected");
         }
 
         if (checked[i] === true) {
 
-            if (
-                normalize(answers[i] || "") ===
-                normalize(correctAnswers[i])
-            ) {
+            const user =
+                normalize(answers[i] || "");
+
+            const correct =
+                normalize(correctAnswers[i]);
+
+            if (user === correct) {
 
                 room.classList.add("correct");
 
@@ -534,18 +651,18 @@ function updateRoomColors() {
 }
 
 
-/* ============================
-   VÉRIFICATION INDIVIDUELLE
-   ============================ */
+/* =========================
+   VÉRIFIER
+   ========================= */
 
 function checkAnswer() {
 
     saveCurrentAnswer();
 
-    const userAnswer =
+    const user =
         normalize(answers[currentRoom] || "");
 
-    const correctAnswer =
+    const correct =
         normalize(correctAnswers[currentRoom]);
 
     checked[currentRoom] = true;
@@ -553,9 +670,10 @@ function checkAnswer() {
     const status =
         document.getElementById("status");
 
-    if (userAnswer === correctAnswer) {
+    if (user === correct) {
 
-        status.textContent = "✅ Bonne réponse !";
+        status.textContent =
+            "✅ Bonne réponse !";
 
     } else {
 
@@ -567,9 +685,9 @@ function checkAnswer() {
 }
 
 
-/* ============================
-   PIÈCE SUIVANTE
-   ============================ */
+/* =========================
+   SUIVANTE
+   ========================= */
 
 function nextRoom() {
 
@@ -589,9 +707,9 @@ function nextRoom() {
 }
 
 
-/* ============================
-   PIÈCE PRÉCÉDENTE
-   ============================ */
+/* =========================
+   PRÉCÉDENTE
+   ========================= */
 
 function previousRoom() {
 
@@ -611,9 +729,9 @@ function previousRoom() {
 }
 
 
-/* ============================
-   TERMINER LE QUIZ
-   ============================ */
+/* =========================
+   TERMINER
+   ========================= */
 
 function finishQuiz() {
 
@@ -623,15 +741,16 @@ function finishQuiz() {
 
     for (let i = 1; i <= 15; i++) {
 
-        const userAnswer =
+        const user =
             normalize(answers[i] || "");
 
-        const correctAnswer =
+        const correct =
             normalize(correctAnswers[i]);
 
         checked[i] = true;
 
-        if (userAnswer === correctAnswer) {
+        if (user === correct) {
+
             score++;
         }
     }
@@ -657,9 +776,9 @@ function finishQuiz() {
 }
 
 
-/* ============================
-   LÉGENDE
-   ============================ */
+/* =========================
+   AFFICHER / CACHER LÉGENDE
+   ========================= */
 
 function toggleLegend() {
 
@@ -677,9 +796,9 @@ function toggleLegend() {
 }
 
 
-/* ============================
+/* =========================
    TOUCHE ENTRÉE
-   ============================ */
+   ========================= */
 
 document
     .getElementById("answer")
@@ -692,9 +811,9 @@ document
     });
 
 
-/* ============================
+/* =========================
    DÉMARRAGE
-   ============================ */
+   ========================= */
 
 updateDisplay();
 
