@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Quiz des pièces — Premier étage</title>
 
 <style>
@@ -34,52 +33,39 @@ h1 {
     background: white;
     border-radius: 24px;
     padding: 18px;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    box-shadow: 0 3px 15px rgba(0,0,0,.08);
 }
 
-/* =========================
-   PLAN
-   ========================= */
-
+/* PLAN */
 .plan-container {
     position: relative;
     width: 100%;
     overflow: hidden;
     border: 1px solid #ddd;
     background: white;
+    line-height: 0;
 }
 
 .plan-image {
     display: block;
     width: 100%;
     height: auto;
-
-    /* Cache uniquement la légende à droite */
     clip-path: inset(0 36% 0 0);
 }
 
-
-/* =========================
-   PASTILLES
-   ========================= */
-
+/* PASTILLES */
 .room {
     position: absolute;
     width: 4%;
     height: 4%;
     transform: translate(-50%, -50%);
     z-index: 5;
-
     background: transparent;
     border: 1px solid rgba(40, 100, 180, 0.35);
     border-radius: 50%;
-
     padding: 0;
     cursor: pointer;
-
-    transition:
-        background 0.15s ease,
-        border 0.15s ease;
+    transition: background 0.15s ease, border 0.15s ease;
 }
 
 .room:hover {
@@ -102,76 +88,48 @@ h1 {
     border: 2px solid rgba(200, 50, 50, 0.80);
 }
 
-
-/* =========================
-   POSITIONS DES 15 PIÈCES
-   ========================= */
-
+/* POSITIONS */
 .r1  { left: 40.1%; top: 24.7%; }
 .r2  { left: 35.1%; top: 24.7%; }
 .r3  { left: 45.8%; top: 24.7%; }
-
 .r4  { left: 30.0%; top: 25.3%; }
 .r5  { left: 51.3%; top: 25.3%; }
-
 .r6  { left: 30.0%; top: 40.5%; }
 .r7  { left: 51.0%; top: 40.5%; }
 .r8  { left: 45.8%; top: 40.5%; }
 .r9  { left: 40.5%; top: 40.5%; }
-
 .r10 { left: 22.9%; top: 51.0%; }
 .r11 { left: 17.5%; top: 51.0%; }
 .r12 { left: 13.8%; top: 51.0%; }
-
 .r13 { left: 8.7%; top: 44.0%; }
 .r14 { left: 8.7%; top: 32.5%; }
 .r15 { left: 8.7%; top: 20.5%; }
 
-
-/* =========================
-   LÉGENDE
-   ========================= */
-
+/* LÉGENDE */
 .legend-button {
     display: block;
     margin: 24px auto 30px;
-
     padding: 14px 28px;
-
     border: none;
     border-radius: 15px;
-
-    background: #eeeeee;
+    background: #eee;
     color: #2878df;
-
     font-size: 22px;
     cursor: pointer;
 }
 
-.legend-button:hover {
-    background: #e4e4e4;
-}
-
 .legend {
     display: none;
-
     margin: 0 auto 25px;
     padding: 18px;
-
     max-width: 700px;
-
     background: #f4f6f8;
     border-radius: 15px;
-
     font-size: 18px;
     line-height: 1.6;
 }
 
-
-/* =========================
-   QUESTION
-   ========================= */
-
+/* QUESTION */
 .question {
     text-align: center;
     font-size: 34px;
@@ -182,10 +140,8 @@ h1 {
 .answer {
     width: 100%;
     padding: 18px 20px;
-
     border: 2px solid #ccc;
     border-radius: 16px;
-
     font-size: 22px;
     outline: none;
 }
@@ -194,11 +150,7 @@ h1 {
     border-color: #4285f4;
 }
 
-
-/* =========================
-   BOUTONS
-   ========================= */
-
+/* BOUTONS */
 .buttons {
     display: flex;
     gap: 16px;
@@ -207,15 +159,11 @@ h1 {
 
 button.action {
     flex: 1;
-
     padding: 17px 10px;
-
     border: none;
     border-radius: 16px;
-
     font-size: 20px;
     cursor: pointer;
-
     background: #edf0f4;
     color: #2878df;
 }
@@ -225,32 +173,17 @@ button.check {
     color: white;
 }
 
-button.action:active {
-    transform: scale(0.98);
-}
-
 .finish {
     display: block;
-
     margin: 18px auto 0;
-
     padding: 17px 30px;
-
     border: none;
     border-radius: 16px;
-
     background: #222;
     color: white;
-
     font-size: 20px;
-
     cursor: pointer;
 }
-
-
-/* =========================
-   RÉSULTAT
-   ========================= */
 
 .status {
     text-align: center;
@@ -261,26 +194,16 @@ button.action:active {
 
 .result {
     display: none;
-
     margin-top: 25px;
     padding: 25px;
-
     text-align: center;
-
     background: #f4f6f8;
     border-radius: 18px;
-
     font-size: 25px;
     font-weight: bold;
 }
 
-
-/* =========================
-   IPHONE / MOBILE
-   ========================= */
-
 @media (max-width: 600px) {
-
     body {
         padding: 10px 5px;
     }
@@ -309,14 +232,9 @@ button.action:active {
         font-size: 18px;
         padding: 16px 5px;
     }
-
-    .finish {
-        font-size: 19px;
-    }
 }
 </style>
 </head>
-
 
 <body>
 
@@ -326,126 +244,53 @@ button.action:active {
 
 <div class="quiz-card">
 
-
-<!-- =========================
-     PLAN
-     ========================= -->
-
 <div class="plan-container">
 
-    <img
-        src="plan-premier-étage.png"
-        class="plan-image"
-        alt="Plan du premier étage"
-    >
+<img
+    src="plan-premier-etage.png"
+    class="plan-image"
+    alt="Plan du premier étage"
+>
 
-    <button class="room r1"
-        onclick="selectRoom(1)"
-        aria-label="Pièce 1"></button>
-
-    <button class="room r2"
-        onclick="selectRoom(2)"
-        aria-label="Pièce 2"></button>
-
-    <button class="room r3"
-        onclick="selectRoom(3)"
-        aria-label="Pièce 3"></button>
-
-    <button class="room r4"
-        onclick="selectRoom(4)"
-        aria-label="Pièce 4"></button>
-
-    <button class="room r5"
-        onclick="selectRoom(5)"
-        aria-label="Pièce 5"></button>
-
-    <button class="room r6"
-        onclick="selectRoom(6)"
-        aria-label="Pièce 6"></button>
-
-    <button class="room r7"
-        onclick="selectRoom(7)"
-        aria-label="Pièce 7"></button>
-
-    <button class="room r8"
-        onclick="selectRoom(8)"
-        aria-label="Pièce 8"></button>
-
-    <button class="room r9"
-        onclick="selectRoom(9)"
-        aria-label="Pièce 9"></button>
-
-    <button class="room r10"
-        onclick="selectRoom(10)"
-        aria-label="Pièce 10"></button>
-
-    <button class="room r11"
-        onclick="selectRoom(11)"
-        aria-label="Pièce 11"></button>
-
-    <button class="room r12"
-        onclick="selectRoom(12)"
-        aria-label="Pièce 12"></button>
-
-    <button class="room r13"
-        onclick="selectRoom(13)"
-        aria-label="Pièce 13"></button>
-
-    <button class="room r14"
-        onclick="selectRoom(14)"
-        aria-label="Pièce 14"></button>
-
-    <button class="room r15"
-        onclick="selectRoom(15)"
-        aria-label="Pièce 15"></button>
+<button class="room r1" onclick="selectRoom(1)"></button>
+<button class="room r2" onclick="selectRoom(2)"></button>
+<button class="room r3" onclick="selectRoom(3)"></button>
+<button class="room r4" onclick="selectRoom(4)"></button>
+<button class="room r5" onclick="selectRoom(5)"></button>
+<button class="room r6" onclick="selectRoom(6)"></button>
+<button class="room r7" onclick="selectRoom(7)"></button>
+<button class="room r8" onclick="selectRoom(8)"></button>
+<button class="room r9" onclick="selectRoom(9)"></button>
+<button class="room r10" onclick="selectRoom(10)"></button>
+<button class="room r11" onclick="selectRoom(11)"></button>
+<button class="room r12" onclick="selectRoom(12)"></button>
+<button class="room r13" onclick="selectRoom(13)"></button>
+<button class="room r14" onclick="selectRoom(14)"></button>
+<button class="room r15" onclick="selectRoom(15)"></button>
 
 </div>
 
-
-<!-- =========================
-     LÉGENDE
-     ========================= -->
-
 <button class="legend-button" onclick="toggleLegend()">
-    👁️ Voir la légende
+👁️ Voir la légende
 </button>
 
 <div id="legend" class="legend">
 
-    <strong>Les bureaux du premier étage :</strong>
-    <br><br>
+<strong>Les bureaux du premier étage :</strong><br><br>
 
-    1. Salon Doré
-    <br>
-
-    2. Secrétariat particulier
-    <br>
-
-    3. Salon Vert
-    <br>
-
-    4-7. Bureaux des collaborateurs
-    <br>
-
-    8. Salon des huissiers
-    <br>
-
-    9. Vestibule
-    <br>
-
-    10-15. Appartements privés
+1. Salon Doré<br>
+2. Secrétariat particulier<br>
+3. Salon Vert<br>
+4-7. Bureaux des collaborateurs<br>
+8. Salon des huissiers<br>
+9. Vestibule<br>
+10-15. Appartements privés
 
 </div>
-
-
-<!-- =========================
-     QUESTION
-     ========================= -->
 
 <div id="question" class="question">
-    Pièce n°1
+Pièce n°1
 </div>
-
 
 <input
     id="answer"
@@ -457,95 +302,59 @@ button.action:active {
     spellcheck="false"
 >
 
-
-<!-- =========================
-     NAVIGATION
-     ========================= -->
-
 <div class="buttons">
 
-    <button
-        class="action check"
-        onclick="checkAnswer()">
-        ✓ Vérifier
-    </button>
+<button class="action check" onclick="checkAnswer()">
+✓ Vérifier
+</button>
 
-    <button
-        class="action"
-        onclick="previousRoom()">
-        ← Précédente
-    </button>
+<button class="action" onclick="previousRoom()">
+← Précédente
+</button>
 
-    <button
-        class="action"
-        onclick="nextRoom()">
-        → Suivante
-    </button>
+<button class="action" onclick="nextRoom()">
+→ Suivante
+</button>
 
 </div>
 
-
-<button
-    class="finish"
-    onclick="finishQuiz()">
-    🏁 Terminer le quiz
+<button class="finish" onclick="finishQuiz()">
+🏁 Terminer le quiz
 </button>
-
 
 <div id="status" class="status"></div>
 
 <div id="result" class="result"></div>
 
-
 </div>
 </div>
-
 
 <script>
 
-/* =========================
-   RÉPONSES
-   ========================= */
-
 const correctAnswers = {
 
-    1: "Salon Doré",
+1: "Salon Doré",
+2: "Secrétariat particulier",
+3: "Salon Vert",
+4: "Bureaux des collaborateurs",
+5: "Bureaux des collaborateurs",
+6: "Bureaux des collaborateurs",
+7: "Bureaux des collaborateurs",
+8: "Salon des huissiers",
+9: "Vestibule",
+10: "Appartements privés",
+11: "Appartements privés",
+12: "Appartements privés",
+13: "Appartements privés",
+14: "Appartements privés",
+15: "Appartements privés"
 
-    2: "Secrétariat particulier",
-
-    3: "Salon Vert",
-
-    4: "Bureaux des collaborateurs",
-    5: "Bureaux des collaborateurs",
-    6: "Bureaux des collaborateurs",
-    7: "Bureaux des collaborateurs",
-
-    8: "Salon des huissiers",
-
-    9: "Vestibule",
-
-    10: "Appartements privés",
-    11: "Appartements privés",
-    12: "Appartements privés",
-    13: "Appartements privés",
-    14: "Appartements privés",
-    15: "Appartements privés"
 };
-
-
-/* =========================
-   VARIABLES
-   ========================= */
 
 let currentRoom = 1;
 
 const answers = {};
 const checked = {};
-
-
-/* =========================
-   NORMALISATION
-   ========================= */
 
 function normalize(text) {
 
@@ -556,24 +365,15 @@ function normalize(text) {
         .replace(/[’']/g, "'")
         .replace(/\s+/g, " ")
         .trim();
+
 }
-
-
-/* =========================
-   SAUVEGARDE
-   ========================= */
 
 function saveCurrentAnswer() {
 
-    const input = document.getElementById("answer");
+    answers[currentRoom] =
+        document.getElementById("answer").value;
 
-    answers[currentRoom] = input.value;
 }
-
-
-/* =========================
-   SÉLECTION
-   ========================= */
 
 function selectRoom(room) {
 
@@ -582,35 +382,22 @@ function selectRoom(room) {
     currentRoom = room;
 
     updateDisplay();
+
 }
-
-
-/* =========================
-   AFFICHAGE
-   ========================= */
 
 function updateDisplay() {
 
     document.getElementById("question").textContent =
         "Pièce n°" + currentRoom;
 
-    const input =
-        document.getElementById("answer");
-
-    input.value =
+    document.getElementById("answer").value =
         answers[currentRoom] || "";
 
     document.getElementById("status").textContent = "";
 
     updateRoomColors();
 
-    input.focus();
 }
-
-
-/* =========================
-   COULEURS
-   ========================= */
 
 function updateRoomColors() {
 
@@ -626,7 +413,6 @@ function updateRoomColors() {
         );
 
         if (i === currentRoom) {
-
             room.classList.add("selected");
         }
 
@@ -645,15 +431,14 @@ function updateRoomColors() {
             } else {
 
                 room.classList.add("incorrect");
+
             }
+
         }
+
     }
+
 }
-
-
-/* =========================
-   VÉRIFIER
-   ========================= */
 
 function checkAnswer() {
 
@@ -667,27 +452,21 @@ function checkAnswer() {
 
     checked[currentRoom] = true;
 
-    const status =
-        document.getElementById("status");
-
     if (user === correct) {
 
-        status.textContent =
+        document.getElementById("status").textContent =
             "✅ Bonne réponse !";
 
     } else {
 
-        status.textContent =
+        document.getElementById("status").textContent =
             "❌ Mauvaise réponse";
+
     }
 
     updateRoomColors();
+
 }
-
-
-/* =========================
-   SUIVANTE
-   ========================= */
 
 function nextRoom() {
 
@@ -703,13 +482,10 @@ function nextRoom() {
 
         document.getElementById("status").textContent =
             "Tu es déjà sur la dernière pièce.";
+
     }
+
 }
-
-
-/* =========================
-   PRÉCÉDENTE
-   ========================= */
 
 function previousRoom() {
 
@@ -725,13 +501,10 @@ function previousRoom() {
 
         document.getElementById("status").textContent =
             "Tu es déjà sur la première pièce.";
+
     }
+
 }
-
-
-/* =========================
-   TERMINER
-   ========================= */
 
 function finishQuiz() {
 
@@ -752,7 +525,9 @@ function finishQuiz() {
         if (user === correct) {
 
             score++;
+
         }
+
     }
 
     updateRoomColors();
@@ -770,15 +545,14 @@ function finishQuiz() {
     document.getElementById("status").textContent = "";
 
     window.scrollTo({
+
         top: document.body.scrollHeight,
+
         behavior: "smooth"
+
     });
+
 }
-
-
-/* =========================
-   AFFICHER / CACHER LÉGENDE
-   ========================= */
 
 function toggleLegend() {
 
@@ -792,28 +566,31 @@ function toggleLegend() {
     } else {
 
         legend.style.display = "block";
+
     }
+
 }
 
+document
+.getElementById("answer")
+.addEventListener("keydown", function(event) {
 
-/* =========================
-   TOUCHE ENTRÉE
-   ========================= */
+    if (event.key === "Enter") {
+
+        checkAnswer();
+
+    }
+
+});
 
 document
-    .getElementById("answer")
-    .addEventListener("keydown", function(event) {
+.querySelector(".plan-image")
+.addEventListener("error", function() {
 
-        if (event.key === "Enter") {
+    document.getElementById("status").textContent =
+        "⚠️ Impossible de charger le plan.";
 
-            checkAnswer();
-        }
-    });
-
-
-/* =========================
-   DÉMARRAGE
-   ========================= */
+});
 
 updateDisplay();
 
