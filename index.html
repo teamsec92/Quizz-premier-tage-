@@ -88,7 +88,7 @@ h1 {
     border: 2px solid rgba(200, 50, 50, 0.80);
 }
 
-/* POSITIONS */
+/* POSITIONS DES PASTILLES — CONSERVÉES */
 .r1  { left: 40.1%; top: 24.7%; }
 .r2  { left: 35.1%; top: 24.7%; }
 .r3  { left: 45.8%; top: 24.7%; }
@@ -203,7 +203,9 @@ button.check {
     font-weight: bold;
 }
 
+/* AFFICHAGE MOBILE */
 @media (max-width: 600px) {
+
     body {
         padding: 10px 5px;
     }
@@ -214,6 +216,17 @@ button.check {
 
     .quiz-card {
         padding: 12px;
+    }
+
+    /*
+       On agrandit le plan uniquement.
+       Les pastilles restent liées au plan
+       et gardent exactement leurs positions.
+    */
+    .plan-container {
+        transform: scale(1.45);
+        transform-origin: top center;
+        margin-bottom: 115px;
     }
 
     .question {
@@ -231,6 +244,10 @@ button.check {
     button.action {
         font-size: 18px;
         padding: 16px 5px;
+    }
+
+    .finish {
+        font-size: 19px;
     }
 }
 </style>
@@ -425,13 +442,9 @@ function updateRoomColors() {
                 normalize(correctAnswers[i]);
 
             if (user === correct) {
-
                 room.classList.add("correct");
-
             } else {
-
                 room.classList.add("incorrect");
-
             }
 
         }
@@ -523,9 +536,7 @@ function finishQuiz() {
         checked[i] = true;
 
         if (user === correct) {
-
             score++;
-
         }
 
     }
@@ -545,11 +556,8 @@ function finishQuiz() {
     document.getElementById("status").textContent = "";
 
     window.scrollTo({
-
         top: document.body.scrollHeight,
-
         behavior: "smooth"
-
     });
 
 }
@@ -560,13 +568,9 @@ function toggleLegend() {
         document.getElementById("legend");
 
     if (legend.style.display === "block") {
-
         legend.style.display = "none";
-
     } else {
-
         legend.style.display = "block";
-
     }
 
 }
@@ -576,9 +580,7 @@ document
 .addEventListener("keydown", function(event) {
 
     if (event.key === "Enter") {
-
         checkAnswer();
-
     }
 
 });
